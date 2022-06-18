@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_code_smells/bloaters/primitive_obserssion/user_fixed1.dart';
 import 'package:flutter_code_smells/bloaters/primitive_obserssion/value_objects/phone_failure.dart';
 import 'package:flutter_code_smells/bloaters/primitive_obserssion/value_objects/value_object.dart';
 
-class PhoneValueObject extends ValueObject<String> {
+class PhoneValueObject extends ValueObject<PhoneNumber> {
   @override
-  final Either<PhoneFailure, String> value;
+  final Either<PhoneFailure, PhoneNumber> value;
 
   PhoneValueObject._(this.value);
 
@@ -12,12 +13,13 @@ class PhoneValueObject extends ValueObject<String> {
     return PhoneValueObject._(validatePhone(ddd, phone));
   }
 
-  static Either<PhoneFailure, String> validatePhone(String ddd, String phone) {
+  static Either<PhoneFailure, PhoneNumber> validatePhone(
+      String ddd, String phone) {
     if (ddd.isEmpty) {
       return left(PhoneFailure(message: "Telefone inválido!"));
     }
 
-    return right(ddd + phone);
+    return right(PhoneNumber(ddd: ddd, number: phone));
   }
 }
 
