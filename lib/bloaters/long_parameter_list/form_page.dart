@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_code_smells/bloaters/long_parameter_list/range_dates.dart';
+import 'package:flutter_code_smells/bloaters/long_parameter_list/service.dart';
 
 class FormPage extends StatelessWidget {
   Map<String, dynamic> data = {};
-  TextEditingController initDateController = TextEditingController();
+  TextEditingController beginDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
+  Service service = Service();
+  RangeDates dates = RangeDates(start: DateTime.now(), end: DateTime.now());
 
   FormPage({Key? key}) : super(key: key);
 
@@ -19,8 +23,8 @@ class FormPage extends StatelessWidget {
             _buildField('Email', TextInputType.emailAddress),
             _buildField('Cpf', TextInputType.number),
             _buildField('Address', TextInputType.text),
-            _buildDateTimeField("Data Inicio", initDateController, context),
-            _buildDateTimeField("Data Fim", endDateController, context),
+            _buildDateTimeField("Begin Date", beginDateController, context),
+            _buildDateTimeField("End Date", endDateController, context),
             _buildButton(),
           ],
         ),
@@ -63,11 +67,16 @@ class FormPage extends StatelessWidget {
   Widget _buildButton() {
     return ElevatedButton(
         onPressed: () {
-          print(data["Name"]);
-          print(data["Age"]);
-          print(data["Email"]);
-          print(data["Cpf"]);
-          print(data["Address"]);
+          String name = data["Name"];
+          String age = data["Age"];
+          String email = data["Email"];
+          String cpf = data["Cpf"];
+          String address = data["Address"];
+
+          DateTime begin = DateTime.parse(beginDateController.text);
+          DateTime end = DateTime.parse(endDateController.text);
+
+          service.signUp(name, age, email, cpf, address, begin, end);
         },
         child: Text('Enviar'));
   }
