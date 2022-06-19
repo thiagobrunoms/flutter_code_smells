@@ -1,6 +1,10 @@
 class RangeDates {
-  DateTime start;
+  DateTime begin;
   DateTime end;
 
-  RangeDates({required this.start, required this.end});
+  RangeDates({required this.begin, required this.end});
+
+  set updateBegin(DateTime newBegin) => begin = newBegin;
+
+  set updateEnd(DateTime newEnd) => end = newEnd;
 }

@@ -7,7 +7,7 @@ class FormPage extends StatelessWidget {
   TextEditingController beginDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   Service service = Service();
-  RangeDates dates = RangeDates(start: DateTime.now(), end: DateTime.now());
+  RangeDates dateRange = RangeDates(begin: DateTime.now(), end: DateTime.now());
 
   FormPage({Key? key}) : super(key: key);
 
@@ -73,11 +73,22 @@ class FormPage extends StatelessWidget {
           String cpf = data["Cpf"];
           String address = data["Address"];
 
-          DateTime begin = DateTime.parse(beginDateController.text);
-          DateTime end = DateTime.parse(endDateController.text);
+          DateTime begin;
+          if (beginDateController.text.isNotEmpty) {
+            begin = DateTime.parse(beginDateController.text);
+          } else {
+            begin = dateRange.begin;
+          }
+
+          DateTime end;
+          if (endDateController.text.isNotEmpty) {
+            end = DateTime.parse(endDateController.text);
+          } else {
+            end = dateRange.end;
+          }
 
           service.signUp(name, age, email, cpf, address, begin, end);
         },
-        child: Text('Enviar'));
+        child: const Text('Enviar'));
   }
 }
