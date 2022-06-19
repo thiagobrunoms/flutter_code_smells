@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_code_smells/bloaters/long_methods_and_large_classes/bad_smell_long_method.dart';
 import 'package:flutter_code_smells/bloaters/long_methods_and_large_classes/fixed_long_method_2/fixed_long_method_2.dart';
+import 'package:flutter_code_smells/bloaters/long_parameter_list/form_page.dart';
 
 import 'bloaters/long_methods_and_large_classes/fixed_long_method_1.dart';
 
@@ -29,6 +30,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home:
-            const FixedLongMethod2()); //const FixedLongMethod2()); // const FixedLongMethod1()); //const BadSmellLongMethod());
+            FormPage()); // const FixedLongMethod2()); //const FixedLongMethod2()); // const FixedLongMethod1()); //const BadSmellLongMethod());
   }
 }
